@@ -27,6 +27,20 @@
                 }
                 return $cipher->getOutput();
                 break;
+
+            case 'vigenere':
+                if (!validateKey_String($key)) {
+                    return "Invalid key. Please enter only alphabetic characters.";
+                }
+
+                $cipher = new Vigenere($input, $key);
+                if ($choiceCrypt == "encrypt") {
+                    $cipher->encrypt();
+                } else {
+                    $cipher->decrypt();
+                }
+                return $cipher->getOutput();
+                break;
         }
     }
     function validateInput ($input) {
@@ -34,6 +48,15 @@
             return false;
         }
         if (!ctype_alpha(str_replace(' ', '', $input))) {
+            return false;
+        }
+        return true;
+    }
+    function validateKey_String ($key) {
+        if (empty($key)) {
+            return false;
+        }
+        if (!ctype_alpha($key)) {
             return false;
         }
         return true;

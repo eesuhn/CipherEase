@@ -41,6 +41,15 @@
                                     }
                                 ?>
                             >Caesar</option>
+                            <option value="vigenere"
+                                <?php
+                                    if (isset($_POST["choiceCipher"])) {
+                                        if ($_POST["choiceCipher"] == "vigenere") {
+                                            echo "selected";
+                                        }
+                                    }
+                                ?>
+                            >Vigenère</option>
                         </select>
                     </div>
 
