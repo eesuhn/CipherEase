@@ -50,6 +50,15 @@
                                     }
                                 ?>
                             >Vigenère</option>
+                            <option value="columnar"
+                                <?php
+                                    if (isset($_POST["choiceCipher"])) {
+                                        if ($_POST["choiceCipher"] == "columnar") {
+                                            echo "selected";
+                                        }
+                                    }
+                                ?>
+                            >Columnar</option>
                         </select>
                     </div>
 
