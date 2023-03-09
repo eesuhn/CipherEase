@@ -33,9 +33,8 @@ class Columnar {
     private function generateTable() {
     $this->rows = ceil(strlen($this->text) / strlen($this->key));
     $this->cols = strlen($this->key);
-    $this->text = str_replace(' ', '', $this->text);
-    $this->text = str_pad($this->text, $this->rows * 
-    $this->cols, " ", STR_PAD_RIGHT);
+    $this->text = str_replace(' ', '_', $this->text);
+    $this->text = str_pad($this->text, $this->rows * $this->cols, " ", STR_PAD_RIGHT);
     $this->table = array();
     for ($i = 0; $i < $this->cols; $i++) {
         $this->table[$i] = str_repeat('', $this->rows);
@@ -57,13 +56,18 @@ class Columnar {
     }
 
     private function readTable() {
-        $this->output = "";
-        for ($i = 0; $i < $this->cols; $i++) {
-            for ($j = 0; $j < $this->rows; $j++) {
-                $this->output .= trim($this->table[$i][$j]);
+    $this->output = "";
+    for ($i = 0; $i < $this->cols; $i++) {
+        for ($j = 0; $j < $this->rows; $j++) {
+            $char = trim($this->table[$i][$j]);
+            if ($char == '_') {
+                $this->output .= ' ';
+            } else {
+                $this->output .= $char;
             }
         }
     }
+}
 }
 
 function columnar($text, $key, $decrypt = false) {
@@ -75,5 +79,4 @@ function columnar($text, $key, $decrypt = false) {
     }
     return $cipher->getOutput();
 }
-
 ?>
