@@ -2,6 +2,7 @@
     include 'backend/cipher.php';
     include 'backend/caesar.php';
     include 'backend/vigenere.php';
+    include 'backend/columnar.php';
 
     function encryptChoice ($choiceCipher, $input, $key, $choiceCrypt) {
 
@@ -41,8 +42,24 @@
                 }
                 return $cipher->getOutput();
                 break;
+
+            case 'columnar':
+                if (!validateKey($key)) {
+                    return "Invalid key. Please enter a key.";
+                }
+
+                $cipher = new Columnar($input, $key);
+                if ($choiceCrypt == "encrypt") {
+                    $cipher->encrypt();
+                } else {
+                    $cipher->decrypt();
+                }
+                return $cipher->getOutput();
+                break;
+
         }
     }
+
     function validateInput ($input) {
         if (empty($input)) {
             return false;
@@ -52,6 +69,15 @@
         }
         return true;
     }
+ 
+    function validateKey($key) {
+    if (empty($key)) {
+        return false;
+    }
+    return true;
+}
+
+
     function validateKey_String ($key) {
         if (empty($key)) {
             return false;
@@ -61,6 +87,7 @@
         }
         return true;
     }
+
     function validateKey_Caesar ($key) {
         if (empty($key)) {
             return false;
