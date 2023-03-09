@@ -31,17 +31,19 @@ class Columnar {
     }
 
     private function generateTable() {
-        $this->rows = ceil(strlen($this->text) / strlen($this->key));
-        $this->cols = strlen($this->key);
-        $this->text = str_pad($this->text, $this->rows * $this->cols, " ");
-        $this->table = array();
-        for ($i = 0; $i < $this->cols; $i++) {
-            $this->table[$i] = str_repeat(' ', $this->rows);
-            for ($j = 0; $j < $this->rows; $j++) {
-                $this->table[$i][$j] = $this->text[$j * $this->cols + $i];
-            }
+    $this->rows = ceil(strlen($this->text) / strlen($this->key));
+    $this->cols = strlen($this->key);
+    $this->text = str_replace(' ', '', $this->text);
+    $this->text = str_pad($this->text, $this->rows * 
+    $this->cols, " ", STR_PAD_RIGHT);
+    $this->table = array();
+    for ($i = 0; $i < $this->cols; $i++) {
+        $this->table[$i] = str_repeat('', $this->rows);
+        for ($j = 0; $j < $this->rows; $j++) {
+            $this->table[$i][$j] = $this->text[$j * $this->cols + $i];
         }
     }
+}
 
     private function sortTable() {
         $keys = str_split($this->key);
@@ -58,7 +60,7 @@ class Columnar {
         $this->output = "";
         for ($i = 0; $i < $this->cols; $i++) {
             for ($j = 0; $j < $this->rows; $j++) {
-                $this->output .= $this->table[$i][$j];
+                $this->output .= trim($this->table[$i][$j]);
             }
         }
     }
