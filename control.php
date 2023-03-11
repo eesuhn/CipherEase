@@ -44,8 +44,8 @@
                 break;
 
             case 'columnar':
-                if (!validateKey($key)) {
-                    return "Invalid key. Please enter a key.";
+                if (!validateKey_String($key)) {
+                    return "Invalid key. Please enter only alphabetic characters.";
                 }
 
                 $cipher = new Columnar($input, $key);
@@ -56,7 +56,6 @@
                 }
                 return $cipher->getOutput();
                 break;
-
         }
     }
 
@@ -69,14 +68,6 @@
         }
         return true;
     }
- 
-    function validateKey($key) {
-    if (empty($key)) {
-        return false;
-    }
-    return true;
-}
-
 
     function validateKey_String ($key) {
         if (empty($key)) {
