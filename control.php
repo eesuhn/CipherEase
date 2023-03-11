@@ -42,20 +42,6 @@
                 }
                 return $cipher->getOutput();
                 break;
-
-            case 'columnar':
-                if (!validateKey_String($key)) {
-                    return "Invalid key. Please enter only alphabetic characters.";
-                }
-
-                $cipher = new Columnar($input, $key);
-                if ($choiceCrypt == "encrypt") {
-                    $cipher->encrypt();
-                } else {
-                    $cipher->decrypt();
-                }
-                return $cipher->getOutput();
-                break;
         }
     }
 
